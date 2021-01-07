@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Awards!</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Movie Awards</h1>
+      <p>
+        Welcome to the Movie Awards 2021! Please nominate your five favorite
+        movies for the "Movie of the Year".
+      </p>
+    </header>
+
+    <main>
+      <form>
+        <div>
+          <label for="movie">Please search for your favorite movie:</label>
+          <input
+            type="text"
+            name="movie"
+            id="movie"
+            placeholder="Movie Title"
+          />
+        </div>
+        <button type="submit" id="submitBtn">Search</button>
+      </form>
+
+      <div class="movies-container">
+        <h2>Movie List</h2>
+        <p id="info" class="empty">Your search results will appear here.</p>
+
+        <ul id="movieList"></ul>
+      </div>
+
+      <div class="nominations-container">
+        <h2>My Nominees</h2>
+        <ul id="nominationsList"></ul>
+      </div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,215 @@
+@mixin button {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  width: max-content;
+  cursor: pointer;
+  box-shadow: 0 1px 3px;
+
+  @media screen and (max-width: 576px) {
+    width: 100%;
+  }
+
+  &:active {
+    box-shadow: 0 1px 1px;
+  }
+
+  &:disabled {
+    background-color: #29658d30;
+    pointer-events: none;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #00000001;
+}
+
+header {
+  background-color: #29658ddd;
+  color: #fefefe;
+  padding: 2rem;
+  // border-radius: 6px;
+  width: 100%;
+  text-align: center;
+
+  h1 {
+    margin: 0 0 1rem;
+  }
+}
+
+main {
+  width: 100%;
+  min-height: 70vh;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  grid-template-rows: auto;
+  gap: 1rem;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 3fr;
+    padding: 1rem;
+  }
+}
+
+form {
+  display: flex;
+  padding: 2rem;
+  // margin: auto;
+  // width: 50%;
+  grid-area: 1/1/2/3;
+  align-self: center;
+  justify-self: center;
+
+  @media screen and (max-width: 768px) {
+    grid-area: initial;
+  }
+
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    padding: 0rem;
+  }
+
+  label {
+    font-size: 1rem;
+    color: #29658d;
+  }
+
+  input {
+    height: 2.5rem;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    margin: 1rem 0 2rem;
+    border-radius: 4px;
+    border-width: 1px;
+    // border: none;
+
+    @media screen and (max-width: 768px) {
+      margin: 1rem 0 0;
+    }
+  }
+
+  button {
+    @include button;
+    align-self: flex-end;
+
+    &[type='submit'] {
+      height: 2.5rem;
+      background-color: #29658ddd;
+      color: #fefefe;
+      margin: 1rem 0 2rem 1rem;
+
+      @media screen and (max-width: 768px) {
+        margin: 1rem 0 0 1rem;
+      }
+      &:active {
+        background-color: #29658d;
+      }
+    }
+  }
+}
+
+.movies-container {
+  padding: 1rem 2rem;
+  text-align: center;
+  background-color: #29658d30;
+
+  p {
+    &.empty {
+      margin: 5rem 0;
+
+      @media screen and (max-width: 768px) {
+        margin: 2rem 0;
+      }
+    }
+  }
+}
+
+.nominations-container {
+  text-align: center;
+  padding: 1rem 2rem;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+.movie {
+  display: flex;
+  padding: 1rem;
+  margin: 1rem;
+  gap: 1rem;
+
+  @media screen and (max-width: 576px) {
+    margin: 1rem 0;
+    padding: 0;
+  }
+
+  img {
+    height: 5rem;
+    width: 4rem;
+    object-fit: contain;
+
+    @media screen and (max-width: 576px) {
+      align-self: center;
+    }
+  }
+
+  &__details {
+    width: 100%;
+    text-align: initial;
+    padding: 0 1rem 0 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    // justify-content: space-between;
+
+    h3 {
+      max-width: 80%;
+
+      @media screen and (max-width: 576px) {
+        font-size: 1rem;
+        max-width: 100%;
+      }
+    }
+
+    p {
+      color: #00000080;
+
+      @media screen and (max-width: 576px) {
+        font-size: 0.75rem;
+      }
+    }
+
+    button {
+      @include button;
+      background-color: #29658ddd;
+      color: #fefefe;
+      padding: 0.5rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+
+      @media screen and (max-width: 576px) {
+        width: max-content;
+        position: initial;
+        font-size: 0.57rem;
+        margin: 0.5rem 0 0;
+        align-self: flex-start;
+      }
+      // transform: translate(0, -50%);
+    }
+  }
+}
