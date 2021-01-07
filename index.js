@@ -1,21 +1,69 @@
+const banner = document.querySelector('#banner');
+const bannerText = document.querySelector('#bannerText');
+const closeBannerBtn = document.querySelector('#closeBannerBtn');
+
 const form = document.querySelector('form');
 const searchTerm = document.querySelector('#movie');
-const info = document.querySelector('#info');
+const movieInfo = document.querySelector('#movieInfo');
+const nomineeInfo = document.querySelector('#nomineeInfo');
 
 const movieList = document.querySelector('#movieList');
 const nomineeList = document.querySelector('#nominationsList');
 
 let nominees = JSON.parse(localStorage.getItem('awardNominees')) || [];
+let bannerTimeout;
+
+/**
+ *
+ * @param {string} text text to display in banner
+ * @param {string} color backgroundColor of the banner
+ * @param {number} timeout timeout in milliseconds before banner clears
+ */
+const showBanner = (
+  text = bannerText.innerText,
+  color = '#4ac774',
+  timeout = 60000
+) => {
+  // if (text) {
+  banner.style.backgroundColor = color;
+  bannerText.innerText = text;
+  // }
+
+  if (typeof +timeout === 'number' && !isNaN(+timeout)) {
+    bannerTimeout = setTimeout(() => {
+      banner.classList.add('banner--hidden');
+    }, +timeout);
+  }
+
+  banner.classList.remove('banner--hidden');
+};
+
+const updateNominationsLeft = () => {
+  if (nominees.length) {
+    nomineeInfo.classList.remove('empty');
+    nomineeInfo.innerText = `You have ${5 - nominees.length} nomination${
+      nominees.length > 1 ? 's' : ''
+    } left.`;
+
+    if (nominees.length === 5) {
+      showBanner('You have selected five movies. Thank you!');
+    }
+  } else {
+    nomineeInfo.classList.add('empty');
+    nomineeInfo.innerText = 'Oops! :( There are no nominees yet.';
+  }
+};
 
 const fillNomineeList = () => {
   let html = ``;
+  updateNominationsLeft();
 
   nominees.forEach((movie) => {
     const { title, imdbId, year, imgSrc } = movie;
 
     html += `
     <li class="movie" data-title="${title}" data-year="${year}" data-imdb-id="${imdbId}" >
-    <img src="${imgSrc}" alt="${title}"  />
+    ${imgSrc ? `<img src="${imgSrc}" alt="${title}"  />` : ''}
     <div class="movie__details">
       <h3>${title}</h3>
       <p>${year}</p>
@@ -27,18 +75,20 @@ const fillNomineeList = () => {
 
   nomineeList.innerHTML = html;
 };
-
 fillNomineeList();
 
 const nominate = (e) => {
   if (nominees.length >= 5) {
-    return alert('You can only nominate five movies.');
+    return showBanner('You can only nominate five movies.', 'red');
   }
 
   const movie = e.closest('.movie');
   const { title, imdbId, year } = movie.dataset;
-  const imgSrc = movie.querySelector('img').src;
+  const imgSrc = movie.querySelector('img')
+    ? movie.querySelector('img').src
+    : '';
 
+  // if movie isn't already nominated, proceed
   if (nominees.filter((nominee) => nominee.imdbId === imdbId).length === 0) {
     nominees.push({ title, imdbId, year, imgSrc });
     localStorage.setItem('awardNominees', JSON.stringify(nominees));
@@ -51,8 +101,12 @@ const nominate = (e) => {
     button.setAttribute('onclick', 'withdrawNomination(this)');
 
     nomineeList.appendChild(clone);
+    e.innerText = 'Nominated';
     e.disabled = true;
   }
+
+  if (!nominees.length) nomineeInfo.classList.add('empty');
+  updateNominationsLeft();
 };
 
 const withdrawNomination = (e) => {
@@ -65,9 +119,15 @@ const withdrawNomination = (e) => {
 
   nomineeList.removeChild(movie);
   // enable button in results
-  movieList.querySelector(
+  let movieButton = movieList.querySelector(
     `.movie[data-imdb-id="${imdbId}"] button`
-  ).disabled = false;
+  );
+
+  if (movieButton) {
+    movieButton.disabled = false;
+    movieButton.innerText = 'Nominate';
+  }
+  updateNominationsLeft();
 };
 
 const getMovies = async () => {
@@ -98,18 +158,24 @@ const getMovies = async () => {
       `;
       });
 
-      info.innerText = `Showing results for "${searchTerm.value.trim()}".`;
-      info.classList.remove('empty');
+      movieInfo.innerText = `Showing results for "${searchTerm.value.trim()}".`;
+      movieInfo.classList.remove('empty');
       movieList.innerHTML = moviesHtml;
     } else {
-      info.classList.add('empty');
+      movieInfo.classList.add('empty');
       movieList.innerHTML = '';
-      info.innerText = `No results for "${searchTerm.value.trim()}" found`;
+      movieInfo.innerText = `No results for "${searchTerm.value.trim()}" found`;
     }
   } catch (error) {
     console.error(error);
   }
 };
+
+// event listeners
+closeBannerBtn.addEventListener('click', (e) => {
+  banner.classList.add('banner--hidden');
+  clearTimeout(bannerTimeout);
+});
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
