@@ -243,6 +243,42 @@ h2 {
   margin: 1rem 0;
 }
 
+li {
+  transition: all 0.3s ease-in-out;
+  animation-name: animateIn;
+  animation-duration: 300ms;
+  // animation-delay: calc(2 * 100ms);
+  animation-fill-mode: both;
+  animation-timing-function: ease-in-out;
+  flex: 1;
+
+  &.remove {
+    animation-name: animateOut;
+  }
+}
+
+@keyframes animateIn {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(-8px);
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes animateOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0) translateY(-8px);
+  }
+}
+
 .movie {
   display: flex;
   padding: 1rem;

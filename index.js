@@ -38,6 +38,12 @@ const showBanner = (
   banner.classList.remove('banner--hidden');
 };
 
+const hideBanner = () => {
+  clearTimeout(bannerTimeout);
+
+  banner.classList.add('banner--hidden');
+};
+
 const updateNominationsLeft = () => {
   if (nominees.length) {
     nomineeInfo.classList.remove('empty');
@@ -110,6 +116,7 @@ const nominate = (e) => {
 };
 
 const withdrawNomination = (e) => {
+  hideBanner();
   const movie = e.closest('.movie');
   const { imdbId } = movie.dataset;
 
@@ -117,7 +124,9 @@ const withdrawNomination = (e) => {
 
   localStorage.setItem('awardNominees', JSON.stringify(nominees));
 
-  nomineeList.removeChild(movie);
+  movie.classList.add('remove');
+
+  setTimeout(() => nomineeList.removeChild(movie), 300);
   // enable button in results
   let movieButton = movieList.querySelector(
     `.movie[data-imdb-id="${imdbId}"] button`
