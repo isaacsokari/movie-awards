@@ -84,9 +84,15 @@ header h1 svg {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin: 1rem auto;
+  margin: 1rem 4rem 1rem 0;
   text-transform: capitalize;
   font-size: 1.5rem;
+}
+
+@media screen and (max-width: 576px) {
+  .banner p {
+    font-size: 1.2rem;
+  }
 }
 
 .banner button {
@@ -138,6 +144,15 @@ header h1 svg {
 
 .banner button.remove {
   background-color: #8d3029dd;
+}
+
+@media screen and (max-width: 576px) {
+  .banner button {
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    right: 0.5rem;
+  }
 }
 
 .banner--hidden {
