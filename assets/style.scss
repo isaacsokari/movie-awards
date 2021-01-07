@@ -90,6 +90,7 @@ form {
   grid-area: 1/1/2/3;
   align-self: center;
   justify-self: center;
+  order: 0;
 
   @media screen and (max-width: 768px) {
     grid-area: initial;
@@ -145,6 +146,10 @@ form {
   background-color: #29658d30;
   border-radius: 6px;
 
+  @media screen and (max-width: 768px) {
+    order: 2;
+  }
+
   p {
     &.empty {
       margin: 5rem 0;
@@ -161,6 +166,10 @@ form {
   padding: 1rem 2rem;
   background-color: #298d7730;
   border-radius: 6px;
+
+  @media screen and (max-width: 768px) {
+    order: 1;
+  }
 }
 
 .movie {
