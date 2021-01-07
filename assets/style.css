@@ -37,17 +37,61 @@ header {
   padding: 2rem;
   width: 100%;
   text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+header div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+@media screen and (max-width: 425px) {
+  header div {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 header h1 {
-  margin: 0 0 1rem;
+  margin: 1rem 0;
 }
 
-header h1 svg {
+@media screen and (max-width: 576px) {
+  header h1 {
+    font-size: 2rem;
+  }
+}
+
+header svg {
   height: 4rem;
+  margin: auto;
   fill: currentColor;
   margin: auto 1rem;
   vertical-align: middle;
+}
+
+@media screen and (max-width: 425px) {
+  header svg {
+    height: 3rem;
+  }
 }
 
 .banner {
