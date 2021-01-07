@@ -5,9 +5,9 @@ const info = document.querySelector('#info');
 const movieList = document.querySelector('#movieList');
 const nomineeList = document.querySelector('#nominationsList');
 
-let nominees = [];
+let nominees = JSON.parse(localStorage.getItem('awardNominees')) || [];
 
-const refreshNomineeList = () => {
+const fillNomineeList = () => {
   let html = ``;
 
   nominees.forEach((movie) => {
@@ -19,7 +19,7 @@ const refreshNomineeList = () => {
     <div class="movie__details">
       <h3>${title}</h3>
       <p>${year}</p>
-      <button onclick="withdrawNomination(this)">Remove</button>
+      <button onclick="withdrawNomination(this)" class="remove">Remove</button>
     </div>
   </li>
     `;
@@ -28,18 +28,31 @@ const refreshNomineeList = () => {
   nomineeList.innerHTML = html;
 };
 
+fillNomineeList();
+
 const nominate = (e) => {
+  if (nominees.length >= 5) {
+    return alert('You can only nominate five movies.');
+  }
+
   const movie = e.closest('.movie');
   const { title, imdbId, year } = movie.dataset;
   const imgSrc = movie.querySelector('img').src;
 
-  e.disabled = true;
-
   if (nominees.filter((nominee) => nominee.imdbId === imdbId).length === 0) {
     nominees.push({ title, imdbId, year, imgSrc });
-    // console.log(nominees);
+    localStorage.setItem('awardNominees', JSON.stringify(nominees));
+
+    let clone = movie.cloneNode(true);
+    let button = clone.querySelector('button');
+    button.innerText = 'Remove';
+    button.classList.add('remove');
+
+    button.setAttribute('onclick', 'withdrawNomination(this)');
+
+    nomineeList.appendChild(clone);
+    e.disabled = true;
   }
-  refreshNomineeList();
 };
 
 const withdrawNomination = (e) => {
@@ -47,49 +60,15 @@ const withdrawNomination = (e) => {
   const { imdbId } = movie.dataset;
 
   nominees = nominees.filter((nominee) => nominee.imdbId !== imdbId);
-  refreshNomineeList();
 
+  localStorage.setItem('awardNominees', JSON.stringify(nominees));
+
+  nomineeList.removeChild(movie);
   // enable button in results
   movieList.querySelector(
     `.movie[data-imdb-id="${imdbId}"] button`
   ).disabled = false;
 };
-
-movieList.innerHTML = `
-<li class="movie" data-title="Oloture" data-year="2019" data-imdb-id="asdfsadgs" >
-  <img
-    src="https://m.media-amazon.com/images/M/MV5BOGJlMGQxMTktMWZmNC00ZDU0LWEyNjMtNmZlY2Y3MmFkM2M5XkEyXkFqcGdeQXVyNzgzMTc2OTA@._V1_SX300.jpg"
-    alt="Oloture"
-  />
-  <div class="movie__details">
-    <h3>Oloture</h3>
-    <p>2019</p>
-    <button onclick="nominate(this)">Nominate</button>
-  </div>
-</li>
-<li class="movie" data-title="Oloture" data-year="2019" data-imdb-id="jkkjkdojdk" >
-  <img
-    src="https://m.media-amazon.com/images/M/MV5BOGJlMGQxMTktMWZmNC00ZDU0LWEyNjMtNmZlY2Y3MmFkM2M5XkEyXkFqcGdeQXVyNzgzMTc2OTA@._V1_SX300.jpg"
-    alt="Oloture"
-  />
-  <div class="movie__details">
-    <h3>Oloture</h3>
-    <p>2019</p>
-    <button onclick="nominate(this)">Nominate</button>
-  </div>
-</li>
-<li class="movie" data-title="Oloture" data-year="2019" data-imdb-id="duiidujfkhjs" >
-  <img
-    src="https://m.media-amazon.com/images/M/MV5BOGJlMGQxMTktMWZmNC00ZDU0LWEyNjMtNmZlY2Y3MmFkM2M5XkEyXkFqcGdeQXVyNzgzMTc2OTA@._V1_SX300.jpg"
-    alt="Oloture"
-  />
-  <div class="movie__details">
-    <h3>Oloture</h3>
-    <p>2019</p>
-    <button onclick="nominate(this)">Nominate</button>
-  </div>
-</li>
-          `;
 
 const getMovies = async () => {
   const url = `https://www.omdbapi.com/?apikey=afff5766&s=${encodeURIComponent(
