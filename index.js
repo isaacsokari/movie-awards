@@ -22,7 +22,7 @@ let bannerTimeout;
 const showBanner = (
   text = bannerText.innerText,
   color = '#4ac774',
-  timeout = 60000
+  timeout = 10000
 ) => {
   // if (text) {
   banner.style.backgroundColor = color;
