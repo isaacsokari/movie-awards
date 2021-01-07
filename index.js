@@ -188,6 +188,5 @@ closeBannerBtn.addEventListener('click', (e) => {
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
-  console.clear();
   getMovies();
 });
