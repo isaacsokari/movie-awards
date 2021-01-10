@@ -32,10 +32,13 @@ body {
 }
 
 header {
-  background-color: #29658ddd;
   color: #fefefe;
   padding: 2rem;
   width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  min-height: 20rem;
   text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -47,6 +50,29 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-image: url("../img/hero.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  position: relative;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #1e201e;
+  opacity: 30%;
+}
+
+header > * {
+  z-index: 2;
 }
 
 header div {
@@ -71,7 +97,7 @@ header div {
 }
 
 header h1 {
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 
 @media screen and (max-width: 576px) {
@@ -353,6 +379,10 @@ form button[type='submit']:active {
   }
 }
 
+.movies-container p {
+  margin: 1rem 0;
+}
+
 .movies-container p.empty {
   margin: 3rem 0;
 }
@@ -382,6 +412,10 @@ form button[type='submit']:active {
         -ms-flex-order: 1;
             order: 1;
   }
+}
+
+.nominations-container p {
+  margin: 1rem 0;
 }
 
 .nominations-container p.empty {

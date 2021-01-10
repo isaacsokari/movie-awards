@@ -48,16 +48,38 @@ body {
 }
 
 header {
-  background-color: #29658ddd;
+  // background-color: #29658ddd;
   color: #fefefe;
   padding: 2rem;
   // border-radius: 6px;
   width: 100%;
+  height: max-content;
+  min-height: 20rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  background-image: url('../img/hero.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
+  position: relative;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #1e201e;
+    opacity: 30%;
+  }
+
+  & > * {
+    z-index: 2;
+  }
   div {
     display: flex;
     align-items: center;
@@ -67,8 +89,9 @@ header {
       justify-content: center;
     }
   }
+
   h1 {
-    margin: 1rem 0;
+    margin: 2rem 0;
 
     @media screen and (max-width: 576px) {
       font-size: 2rem;
@@ -235,6 +258,8 @@ form {
   }
 
   p {
+    margin: 1rem 0;
+
     &.empty {
       margin: 3rem 0;
 
@@ -260,6 +285,8 @@ form {
   }
 
   p {
+    margin: 1rem 0;
+
     &.empty {
       margin: 3rem 0;
 
