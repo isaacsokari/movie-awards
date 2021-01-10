@@ -17,20 +17,18 @@ let nominees = JSON.parse(localStorage.getItem('awardNominees')) || [];
 let bannerTimeout;
 
 /**
- *
- * @param {string} text text to display in banner
- * @param {string} color backgroundColor of the banner
- * @param {number} timeout timeout in milliseconds before banner clears
+ * Shows a banner with specified text and color for a given timeout
+ * @param {string} text - text to display in banner
+ * @param {string} color - backgroundColor of the banner
+ * @param {number} timeout - timeout in milliseconds before banner clears
  */
 const showBanner = (
   text = bannerText.innerText,
   color = '#4ac774',
   timeout = 10000
 ) => {
-  // if (text) {
   banner.style.backgroundColor = color;
   bannerText.innerText = text;
-  // }
 
   if (typeof +timeout === 'number' && !isNaN(+timeout)) {
     bannerTimeout = setTimeout(() => {
@@ -41,12 +39,18 @@ const showBanner = (
   banner.classList.remove('banner--hidden');
 };
 
+/**
+ * Hides the Banner before the timout elapses
+ */
 const hideBanner = () => {
   clearTimeout(bannerTimeout);
 
   banner.classList.add('banner--hidden');
 };
 
+/**
+ * Updates number of nominees left
+ */
 const updateNomineesLeft = () => {
   if (nominees.length) {
     nomineeInfo.classList.remove('empty');
@@ -63,6 +67,9 @@ const updateNomineesLeft = () => {
   }
 };
 
+/**
+ * Fills the nominees list from local storage (if available)
+ */
 const fillNomineeList = () => {
   let html = ``;
   updateNomineesLeft();
@@ -86,6 +93,10 @@ const fillNomineeList = () => {
 };
 fillNomineeList();
 
+/**
+ * Adds a movie to nominee list
+ * @param {HTMLButtonElement} e - the clicked button
+ */
 const nominate = (e) => {
   if (nominees.length >= 5) {
     return showBanner('You can only nominate five movies.', 'red');
@@ -118,6 +129,10 @@ const nominate = (e) => {
   updateNomineesLeft();
 };
 
+/**
+ * Removes a movie from nominees' list
+ * @param {HTMLButtonElement} e
+ */
 const withdrawNomination = (e) => {
   hideBanner();
   const movie = e.closest('.movie');
@@ -143,13 +158,17 @@ const withdrawNomination = (e) => {
 };
 
 /**
- *
- * @param {string} movieId movieId to check nomination status
+ * Checks if movie is nominated
+ * @param {string} movieId - movieId to check nomination status
+ * @returns {boolean} - movie's nomination status
  */
 const checkIfNominated = (movieId) => {
   return nominees.filter((movie) => movie.imdbId === movieId).length === 1;
 };
 
+/**
+ * Fetches search results from API and fills the DOM with the movies
+ */
 const getMovies = async () => {
   const url = `https://www.omdbapi.com/?apikey=afff5766&s=${encodeURIComponent(
     searchTerm.value.trim()
