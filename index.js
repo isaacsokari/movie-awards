@@ -1,6 +1,8 @@
 const banner = document.querySelector('#banner');
 const bannerText = document.querySelector('#bannerText');
 const closeBannerBtn = document.querySelector('#closeBannerBtn');
+const showNomineesBtn = document.querySelector('#showNominees');
+const hideNomineesBtn = document.querySelector('#hideNominees');
 
 const form = document.querySelector('form');
 const searchTerm = document.querySelector('#movie');
@@ -9,6 +11,7 @@ const nomineeInfo = document.querySelector('#nomineeInfo');
 
 const movieList = document.querySelector('#movieList');
 const nomineeList = document.querySelector('#nomineeList');
+const nomineesContainer = document.querySelector('.nominees-container');
 
 let nominees = JSON.parse(localStorage.getItem('awardNominees')) || [];
 let bannerTimeout;
@@ -199,4 +202,12 @@ closeBannerBtn.addEventListener('click', (e) => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   getMovies();
+});
+
+showNomineesBtn.addEventListener('click', (e) => {
+  nomineesContainer.classList.add('show');
+});
+
+hideNomineesBtn.addEventListener('click', (e) => {
+  nomineesContainer.classList.remove('show');
 });

@@ -3,15 +3,16 @@
   border-radius: 4px;
   border: none;
   width: max-content;
+  max-width: 90vw;
   cursor: pointer;
-  box-shadow: 0 1px 3px;
+  box-shadow: 0 1px 1px 0 #000;
 
   @media screen and (max-width: 576px) {
     width: 100%;
   }
 
   &:active {
-    box-shadow: 0 1px 1px;
+    box-shadow: 0 1px 0.5px 0 #000;
   }
 
   &:disabled {
@@ -38,6 +39,7 @@
 
 body {
   width: 100vw;
+  max-width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -174,10 +176,10 @@ main {
   grid-template-rows: auto;
   gap: 1rem;
   justify-items: center;
-  align-content: center;
 
   @media screen and (max-width: 768px) {
     grid-template-columns: 3fr;
+    grid-template-rows: max-content;
     padding: 1rem;
   }
 }
@@ -190,6 +192,7 @@ form {
   grid-area: 1/1/2/3;
   align-self: center;
   justify-self: center;
+  justify-content: center;
   order: 0;
 
   @media screen and (max-width: 768px) {
@@ -224,12 +227,16 @@ form {
 
     &[type='submit'] {
       height: 2.5rem;
-      background-color: #29658ddd;
+      background-color: #29658dee;
       color: #fefefe;
+      padding: 0.5rem 1rem;
       margin: 1rem 0 2rem 1rem;
 
       @media screen and (max-width: 768px) {
         margin: 1rem 0 0 1rem;
+      }
+      @media screen and (max-width: 576px) {
+        margin: 1rem auto;
       }
       &:active {
         background-color: #29658d;
@@ -254,18 +261,21 @@ form {
 
   & > p {
     margin: 1rem 0;
-
-
   }
 }
 
 .nominees-container {
   padding: 2rem;
-  background-color: #29658d30;
+  background-color: #29658d;
+  color: #fefefe;
   border-radius: 1rem;
   height: max-content;
   width: 100%;
   max-width: 35rem;
+  transition: all 0.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   @media screen and (min-width: 768px) {
     position: sticky;
@@ -277,13 +287,26 @@ form {
   }
 
   @media screen and (max-width: 768px) {
-    order: 3;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    max-width: initial;
+    z-index: 30;
+    transform: translate(-50%, 100%);
+    border-radius: 1rem 1rem 0 0;
+
+    &.show {
+      transform: translate((-50%, 0));
+    }
   }
 
   & > p {
     margin: 1rem 0;
+  }
 
-
+  .movie__details p {
+    color: #fefefe;
   }
 }
 
@@ -337,7 +360,6 @@ li {
     padding: 0;
   }
 
-
   img {
     height: 5rem;
     width: 4rem;
@@ -390,5 +412,35 @@ li {
         align-self: flex-start;
       }
     }
+  }
+}
+
+#showNominees,
+#hideNominees {
+  @include button();
+  padding: 0.5rem;
+
+  @media screen and (min-width: 768.1px) {
+    display: none;
+  }
+}
+
+#showNominees {
+  background-color: #29658d;
+  color: #fefefe;
+  width: max-content;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+#hideNominees {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+
+  @media screen and (max-width: 576px) {
+    position: initial;
+    align-self: center;
   }
 }
