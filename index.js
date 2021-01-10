@@ -8,7 +8,7 @@ const movieInfo = document.querySelector('#movieInfo');
 const nomineeInfo = document.querySelector('#nomineeInfo');
 
 const movieList = document.querySelector('#movieList');
-const nomineeList = document.querySelector('#nominationsList');
+const nomineeList = document.querySelector('#nomineeList');
 
 let nominees = JSON.parse(localStorage.getItem('awardNominees')) || [];
 let bannerTimeout;
@@ -44,11 +44,11 @@ const hideBanner = () => {
   banner.classList.add('banner--hidden');
 };
 
-const updateNominationsLeft = () => {
+const updateNomineesLeft = () => {
   if (nominees.length) {
     nomineeInfo.classList.remove('empty');
-    nomineeInfo.innerText = `You have ${5 - nominees.length} nomination${
-      nominees.length > 1 ? 's' : ''
+    nomineeInfo.innerText = `You have ${5 - nominees.length} nominee${
+      5 - nominees.length > 1 ? 's' : ''
     } left.`;
 
     if (nominees.length === 5) {
@@ -62,7 +62,7 @@ const updateNominationsLeft = () => {
 
 const fillNomineeList = () => {
   let html = ``;
-  updateNominationsLeft();
+  updateNomineesLeft();
 
   nominees.forEach((movie) => {
     const { title, imdbId, year, imgSrc } = movie;
@@ -112,7 +112,7 @@ const nominate = (e) => {
   }
 
   if (!nominees.length) nomineeInfo.classList.add('empty');
-  updateNominationsLeft();
+  updateNomineesLeft();
 };
 
 const withdrawNomination = (e) => {
@@ -136,7 +136,7 @@ const withdrawNomination = (e) => {
     movieButton.disabled = false;
     movieButton.innerText = 'Nominate';
   }
-  updateNominationsLeft();
+  updateNomineesLeft();
 };
 
 /**

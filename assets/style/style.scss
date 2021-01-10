@@ -45,6 +45,7 @@ body {
   align-items: center;
   background-color: #00000001;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 header {
@@ -173,9 +174,11 @@ main {
   min-height: 70vh;
   padding: 2rem 5vw;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 7fr 5fr;
   grid-template-rows: auto;
   gap: 1rem;
+  justify-items: center;
+  align-content: center;
 
   @media screen and (max-width: 768px) {
     grid-template-columns: 3fr;
@@ -206,7 +209,7 @@ form {
 
   label {
     font-size: 1rem;
-    color: #29658d;
+    // color: #29658d;
   }
 
   input {
@@ -245,38 +248,47 @@ form {
 
 .movies-container {
   padding: 2rem;
-  text-align: center;
-  background-color: #29658d30;
-  border-radius: 6px;
+  // text-align: center;
+  // background-color: #044a7930;
+  // border-radius: 2rem;
   height: max-content;
+  width: 100%;
+  max-width: 40rem;
 
   @media screen and (max-width: 1024px) {
-    padding: 1rem;
+    padding: 0;
   }
 
   @media screen and (max-width: 768px) {
     order: 2;
   }
 
+  // & > h2,
+  // & > p {
+  //   margin-left: 2rem;
+  // }
   & > p {
     margin: 1rem 0;
 
-    &.empty {
-      margin: 3rem 0;
+    // &.empty {
+    //   margin: 3rem 0;
 
-      @media screen and (max-width: 768px) {
-        margin: 2rem 0;
-      }
-    }
+    //   @media screen and (max-width: 768px) {
+    //     margin: 2rem 0;
+    //   }
+    // }
   }
 }
 
-.nominations-container {
-  text-align: center;
+.nominees-container {
+  // text-align: center;
   padding: 2rem;
-  background-color: #298d7730;
-  border-radius: 6px;
+  // background-color: #298d7730;
+  background-color: #29658d30;
+  border-radius: 1rem;
   height: max-content;
+  width: 100%;
+  max-width: 35rem;
 
   @media screen and (min-width: 768px) {
     position: sticky;
@@ -294,13 +306,13 @@ form {
   & > p {
     margin: 1rem 0;
 
-    &.empty {
-      margin: 3rem 0;
+    // &.empty {
+    //   margin: 3rem 0;
 
-      @media screen and (max-width: 768px) {
-        margin: 2rem 0;
-      }
-    }
+    //   @media screen and (max-width: 768px) {
+    //     margin: 2rem 0;
+    //   }
+    // }
   }
 }
 
@@ -346,8 +358,8 @@ li {
 
 .movie {
   display: flex;
-  padding: 1rem;
-  margin: 1rem;
+  padding: 1rem 0;
+  margin: 1rem 0;
   gap: 1rem;
 
   @media screen and (max-width: 1024px) {

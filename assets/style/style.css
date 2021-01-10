@@ -29,6 +29,7 @@ body {
           align-items: center;
   background-color: #00000001;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 header {
@@ -236,11 +237,14 @@ main {
   padding: 2rem 5vw;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
+  -ms-grid-columns: 7fr 5fr;
+      grid-template-columns: 7fr 5fr;
   -ms-grid-rows: auto;
       grid-template-rows: auto;
   gap: 1rem;
+  justify-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -289,7 +293,6 @@ form {
 
 form label {
   font-size: 1rem;
-  color: #29658d;
 }
 
 form input {
@@ -360,17 +363,16 @@ form button[type='submit']:active {
 
 .movies-container {
   padding: 2rem;
-  text-align: center;
-  background-color: #29658d30;
-  border-radius: 6px;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  width: 100%;
+  max-width: 40rem;
 }
 
 @media screen and (max-width: 1024px) {
   .movies-container {
-    padding: 1rem;
+    padding: 0;
   }
 }
 
@@ -386,28 +388,19 @@ form button[type='submit']:active {
   margin: 1rem 0;
 }
 
-.movies-container > p.empty {
-  margin: 3rem 0;
-}
-
-@media screen and (max-width: 768px) {
-  .movies-container > p.empty {
-    margin: 2rem 0;
-  }
-}
-
-.nominations-container {
-  text-align: center;
+.nominees-container {
   padding: 2rem;
-  background-color: #298d7730;
-  border-radius: 6px;
+  background-color: #29658d30;
+  border-radius: 1rem;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
+  width: 100%;
+  max-width: 35rem;
 }
 
 @media screen and (min-width: 768px) {
-  .nominations-container {
+  .nominees-container {
     position: -webkit-sticky;
     position: sticky;
     top: 2rem;
@@ -415,31 +408,21 @@ form button[type='submit']:active {
 }
 
 @media screen and (max-width: 1024px) {
-  .nominations-container {
+  .nominees-container {
     padding: 1rem;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .nominations-container {
+  .nominees-container {
     -webkit-box-ordinal-group: 4;
         -ms-flex-order: 3;
             order: 3;
   }
 }
 
-.nominations-container > p {
+.nominees-container > p {
   margin: 1rem 0;
-}
-
-.nominations-container > p.empty {
-  margin: 3rem 0;
-}
-
-@media screen and (max-width: 768px) {
-  .nominations-container > p.empty {
-    margin: 2rem 0;
-  }
 }
 
 h2 {
@@ -515,8 +498,8 @@ li.remove {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 1rem;
-  margin: 1rem;
+  padding: 1rem 0;
+  margin: 1rem 0;
   gap: 1rem;
 }
 
