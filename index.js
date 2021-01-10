@@ -48,7 +48,7 @@ const updateNomineesLeft = () => {
   if (nominees.length) {
     nomineeInfo.classList.remove('empty');
     nomineeInfo.innerText = `You have ${5 - nominees.length} nominee${
-      5 - nominees.length > 1 ? 's' : ''
+      5 - nominees.length !== 1 ? 's' : ''
     } left.`;
 
     if (nominees.length === 5) {
