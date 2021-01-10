@@ -248,6 +248,7 @@ form {
   text-align: center;
   background-color: #29658d30;
   border-radius: 6px;
+  height: max-content;
 
   @media screen and (max-width: 1024px) {
     padding: 1rem;
@@ -257,7 +258,7 @@ form {
     order: 2;
   }
 
-  p {
+  & > p {
     margin: 1rem 0;
 
     &.empty {
@@ -275,16 +276,22 @@ form {
   padding: 2rem;
   background-color: #298d7730;
   border-radius: 6px;
+  height: max-content;
+
+  @media screen and (min-width: 768px) {
+    position: sticky;
+    top: 2rem;
+  }
 
   @media screen and (max-width: 1024px) {
     padding: 1rem;
   }
 
   @media screen and (max-width: 768px) {
-    order: 1;
+    order: 3;
   }
 
-  p {
+  & > p {
     margin: 1rem 0;
 
     &.empty {

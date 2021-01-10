@@ -363,6 +363,9 @@ form button[type='submit']:active {
   text-align: center;
   background-color: #29658d30;
   border-radius: 6px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
 }
 
 @media screen and (max-width: 1024px) {
@@ -379,16 +382,16 @@ form button[type='submit']:active {
   }
 }
 
-.movies-container p {
+.movies-container > p {
   margin: 1rem 0;
 }
 
-.movies-container p.empty {
+.movies-container > p.empty {
   margin: 3rem 0;
 }
 
 @media screen and (max-width: 768px) {
-  .movies-container p.empty {
+  .movies-container > p.empty {
     margin: 2rem 0;
   }
 }
@@ -398,6 +401,17 @@ form button[type='submit']:active {
   padding: 2rem;
   background-color: #298d7730;
   border-radius: 6px;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+@media screen and (min-width: 768px) {
+  .nominations-container {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 2rem;
+  }
 }
 
 @media screen and (max-width: 1024px) {
@@ -408,22 +422,22 @@ form button[type='submit']:active {
 
 @media screen and (max-width: 768px) {
   .nominations-container {
-    -webkit-box-ordinal-group: 2;
-        -ms-flex-order: 1;
-            order: 1;
+    -webkit-box-ordinal-group: 4;
+        -ms-flex-order: 3;
+            order: 3;
   }
 }
 
-.nominations-container p {
+.nominations-container > p {
   margin: 1rem 0;
 }
 
-.nominations-container p.empty {
+.nominations-container > p.empty {
   margin: 3rem 0;
 }
 
 @media screen and (max-width: 768px) {
-  .nominations-container p.empty {
+  .nominations-container > p.empty {
     margin: 2rem 0;
   }
 }
