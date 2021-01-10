@@ -139,6 +139,14 @@ const withdrawNomination = (e) => {
   updateNominationsLeft();
 };
 
+/**
+ *
+ * @param {string} movieId movieId to check nomination status
+ */
+const checkIfNominated = (movieId) => {
+  return nominees.filter((movie) => movie.imdbId === movieId).length === 1;
+};
+
 const getMovies = async () => {
   const url = `https://www.omdbapi.com/?apikey=afff5766&s=${encodeURIComponent(
     searchTerm.value.trim()
@@ -161,7 +169,9 @@ const getMovies = async () => {
       <div class="movie__details">
         <h3>${Title}</h3>
         <p>${Year}</p>
-        <button onclick="nominate(this)">Nominate</button>
+        <button onclick="nominate(this)" ${
+          checkIfNominated(imdbID) ? 'disabled' : ''
+        }>${checkIfNominated(imdbID) ? 'Nominated' : 'Nominate'}</button>
       </div>
     </li>
       `;
