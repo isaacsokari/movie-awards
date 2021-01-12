@@ -32,11 +32,11 @@ const showBanner = (
 
   if (typeof +timeout === 'number' && !isNaN(+timeout)) {
     bannerTimeout = setTimeout(() => {
-      banner.classList.add('banner--hidden');
+      banner.classList.remove('banner--shown');
     }, +timeout);
   }
 
-  banner.classList.remove('banner--hidden');
+  banner.classList.add('banner--shown');
 };
 
 /**
@@ -45,13 +45,13 @@ const showBanner = (
 const hideBanner = () => {
   clearTimeout(bannerTimeout);
 
-  banner.classList.add('banner--hidden');
+  banner.classList.remove('banner--shown');
 };
 
 /**
  * Updates number of nominees left
  */
-const updateNomineesLeft = () => {
+const updateNomineesLeft = (filledFromLocalStorage = false) => {
   if (nominees.length) {
     nomineeInfo.classList.remove('empty');
     nomineeInfo.innerText = `You have ${5 - nominees.length} nominee${
@@ -59,7 +59,9 @@ const updateNomineesLeft = () => {
     } left.`;
 
     if (nominees.length === 5) {
-      showBanner('You have selected five movies. Thank you!');
+      filledFromLocalStorage
+        ? showBanner('Previous Nominations Loaded. Thank You!')
+        : showBanner('You have selected five movies. Thank you!');
     }
   } else {
     nomineeInfo.classList.add('empty');
@@ -72,7 +74,7 @@ const updateNomineesLeft = () => {
  */
 const fillNomineeList = () => {
   let html = ``;
-  updateNomineesLeft();
+  updateNomineesLeft(true);
 
   nominees.forEach((movie) => {
     const { title, imdbId, year, imgSrc } = movie;
@@ -214,7 +216,7 @@ const getMovies = async () => {
 
 // event listeners
 closeBannerBtn.addEventListener('click', (e) => {
-  banner.classList.add('banner--hidden');
+  banner.classList.remove('banner--shown');
   clearTimeout(bannerTimeout);
 });
 
