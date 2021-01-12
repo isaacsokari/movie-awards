@@ -447,9 +447,12 @@ form button[type='submit']:active {
     left: 50%;
     width: 100vw;
     max-width: initial;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
     z-index: 30;
-    -webkit-transform: translate(-50%, 100%);
-            transform: translate(-50%, 100%);
+    -webkit-transform: translateX(-50%) translateY(120vh);
+            transform: translateX(-50%) translateY(120vh);
     border-radius: 1rem 1rem 0 0;
   }
   .nominees-container.show {

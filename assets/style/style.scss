@@ -292,12 +292,13 @@ form {
     left: 50%;
     width: 100vw;
     max-width: initial;
+    height: max-content;
     z-index: 30;
-    transform: translate(-50%, 100%);
+    transform: translateX(-50%) translateY(120vh);
     border-radius: 1rem 1rem 0 0;
 
     &.show {
-      transform: translate((-50%, 0));
+      transform: translate(-50%, 0);
     }
   }
 
