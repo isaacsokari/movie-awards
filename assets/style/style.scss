@@ -288,7 +288,8 @@ form {
 
   @media screen and (max-width: 768px) {
     position: fixed;
-    bottom: 0;
+    top: unset;
+    bottom: 0vh;
     left: 50%;
     width: 100vw;
     max-width: initial;
